@@ -1,8 +1,13 @@
 #criar a estrutura do banco de dados
-from fakepinterest import database
+from fakepinterest import database, login_manager
 from datetime import datetime
+from flask_login import UserMixin
 
-class Usuario(database.Model): #tabela de usuários
+@login_manager.user_loader
+def load_user(id_usuario):
+    return Usuario.query.get(int(id_usuario))
+
+class Usuario(database.Model, UserMixin): #tabela de usuários
     id = database.Column(database.Integer, primary_key=True) #identificador único do usuário
     username = database.Column(database.String, nullable=False) #nome de usuário 
     email = database.Column(database.String, unique=True, nullable=False) #email do usuário
