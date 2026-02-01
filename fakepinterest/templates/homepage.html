@@ -12,6 +12,18 @@
 {% block body %}
 <body>
     <h1>FakePinterest - meu primeiro site no ar</h1>
+
+    <h2>Agora vamos criar no site</h2>
+
+    {% block formulario %}
+    <form method="post">
+        {{ form.csrf_token }}
+        {{ form.email.label() }} {{ form.email(size=32) }} 
+        {{ form.senha.label() }} {{ form.senha(size=32) }} 
+        {{ form.botao_confirmacao() }}
+    </form>
+    {% endblock %}
+    
 </body>
 {% endblock %}
 </html>
